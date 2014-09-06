@@ -1,0 +1,8 @@
+body {
+    font-family: 'RobotoDraft';
+    margin: 0;
+    padding: 0px;
+    overflow:hidden;
+    font-size: 14px;
+    max-width: 300px;
+}
