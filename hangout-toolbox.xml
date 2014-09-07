@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Proxied Hangout" height="200" width="550">
+  <ModulePrefs title="Hangout Toolbox QTM" height="200" width="550">
     <Require feature="dynamic-height"/>
     <Require feature="rpc"/>
     <Require feature="views" />
@@ -65,7 +65,7 @@
     	  var ifrm = document.createElement("IFRAME");
     	  var gd = gadgets.views.getParams()['appData'];
     	  var ifrm_id = "googleplus_target";
-    	  ifrm.setAttribute("src", decodeURIComponent('http://tolxdorff.com/toolbox/index.html') + "?parent="
+    	  ifrm.setAttribute("src", decodeURIComponent('https://hangout-toolbox-qtm.appspot.com/index.html') + "?parent="
     	 		    + encodeURIComponent(window.location.href)
     	 		    + "&token=" + encodeURIComponent(token)
     	 		    + "&gd=" + encodeURIComponent(gd));

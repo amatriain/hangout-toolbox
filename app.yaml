@@ -22,5 +22,5 @@ handlers:
   upload: index.html
 
 - url: /hangout-toolbox.xml
-  static_files: index.html
-  upload: hangout-toolox.xml
+  static_files: hangout-toolbox.xml
+  upload: hangout-toolbox.xml
