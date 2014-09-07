@@ -1,0 +1,26 @@
+application: hangout-toolbox-qtm
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /components
+  static_dir: components
+
+- url: /css
+  static_dir: css
+
+- url: /img
+  static_dir: img
+
+- url: /custom
+  static_dir: custom
+
+- url: /index.html
+  static_files: index.html
+  upload: index.html
+
+- url: /hangout-toolbox.xml
+  static_files: index.html
+  upload: hangout-toolox.xml
