@@ -1,5 +1,5 @@
 
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../components/polymer/polymer.html">
 
 <!--
 Makes Hangout App development easier by loading all the necessary script and
@@ -54,6 +54,7 @@ to enable your application.
          */
         readyCallback: function () {
           global.console.log("hangout-app ready");
+          init();
         },
 
         attached: function () {
