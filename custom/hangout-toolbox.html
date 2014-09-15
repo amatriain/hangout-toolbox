@@ -31,7 +31,7 @@
             <div class="header">
               <h3>Lower Third</h3>
               <paper-toggle-button class="headerswitch"></paper-toggle-button>
-              <paper-icon-button icon="device:screen-rotation" class="small"></paper-icon-button>
+              <paper-icon-button icon="device:screen-rotation" id="mirror" class="small"></paper-icon-button>
             </div>
             <paper-input floatingLabel id="displayName" class="lowerthird" label="Display Name" value={{participant}}></paper-input>
             <paper-input floatingLabel class="lowerthird" label="Tagline"></paper-input>
@@ -108,51 +108,67 @@ Version: 2.0.1
           </div>
           <div style="margin-left: 25px; float: left; font-size: 14px;">Enable Auto Load</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
           <div style="clear: both; margin-top: 15px;"></div>
-          <div style="margin-left: 25px; float: left; font-size: 14px"">Mute sounds</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
+          <div style="margin-left: 25px; float: left; font-size: 14px">Mute sounds</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
           <div style="clear: both; margin-top: 15px;"></div>
-          <div style="margin-left: 25px; float: left; font-size: 14px"">Use last Lowerthird</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
+          <div style="margin-left: 25px; float: left; font-size: 14px">Use last Lowerthird</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
         </section>
       </core-animated-pages>
     </template>
     <script>
-      function getParticipant(){
-        var uid = gapi.hangout.getLocalParticipantId();
-        var p = gapi.hangout.getParticipants();
-        for(i = 0; i < p.length; i++) {
-          if(p[i].id == uid){
-            var user = p[i].person.displayName;
-            console.log(user);
+        var globalShow = false;
+        var overlays = {};
+        var canvas = null;
+        if(typeof FileReader !== "undefined"){
+           var fileReader = new FileReader();
+        }
+
+        function getParticipant() {
+          var uid = gapi.hangout.getLocalParticipantId();
+          var p = gapi.hangout.getParticipants();
+          for(i = 0; i < p.length; i++) {
+            if(p[i].id == uid){
+              var user = p[i].person.displayName;
+              return user;
+            }
           }
         }
-      }
 
-      function init() {
-        console.log("JS kommt hier")
-        getParticipant();
-      }
-
-      Polymer("hangout-toolbox", {
-        ready: function(){
-          // scrape the state off the window location
-          this.page = location.hash.slice(1)|| 'lowerthird';
-          // listen for 'back' events
-          addEventListener('popstate', this.popstate.bind(this));
-          
-        },
-        pageChanged: function() {
-          // if the selected page changes, push a state (unless we are going backward)
-          if (this.poppedPage !== this.page) {
-            history.pushState(this.page, "Title", '#' + this.page);
-          }
-        },
-        popstate: function(event) {
-          // comes here whether we went 'back' from code or UI
-          this.poppedPage = this.page = event.state;
-        },
-        back: function(){
-          // support custom UI for back
-          history.back();
+        function toggleMirror() {
+          gapi.hangout.av.setLocalParticipantVideoMirrored(!gapi.hangout.av.isLocalParticipantVideoMirrored());
         }
-      });
+
+        Polymer("hangout-toolbox", {
+          ready: function(){
+            // scrape the state off the window location
+            this.page = location.hash.slice(1)|| 'lowerthird';
+            // listen for 'back' events
+            addEventListener('popstate', this.popstate.bind(this));
+
+            var mirrorButton = this.$.mirror;
+
+            mirrorButton.addEventListener('click', function(){
+              toggleMirror();
+            });
+            
+          },
+          readyCallback: function() {
+            this.participant = getParticipant();
+            //init();
+          },
+          pageChanged: function() {
+            // if the selected page changes, push a state (unless we are going backward)
+            if (this.poppedPage !== this.page) {
+              history.pushState(this.page, "Title", '#' + this.page);
+            }
+          },
+          popstate: function(event) {
+            // comes here whether we went 'back' from code or UI
+            this.poppedPage = this.page = event.state;
+          },
+          back: function(){
+            // support custom UI for back
+            history.back();
+          }
+        });
     </script>
   </polymer-element>
