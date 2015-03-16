@@ -1,0 +1,18 @@
+{
+  "name": "HangoutToolboxPolymer",
+  "description": "Hangout Toolbox",
+  "homepage": "http://www.hangouttoolbox.com",
+  "keywords": [],
+  "author": "Moritz Tolxdorff",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "platform": "Polymer/platform#master",
+    "core-elements": "Polymer/core-elements",
+    "paper-elements": "Polymer/paper-elements#master",
+    "google-signin": "GoogleWebComponents/google-signin#master"
+  },
+  "resolutions": {
+    "core-iconset-svg": "master"
+  }
+}

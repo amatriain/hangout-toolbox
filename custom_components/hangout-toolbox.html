@@ -1,0 +1,351 @@
+<link rel="import" href="../bower_components/hangout-app/hangout-app.html">
+<script src="jcanvas.min.js"></script>
+<polymer-element name='hangout-toolbox'  extends="hangout-app" attributes="apikey">
+    <template>
+      <link rel="stylesheet" href="hangout-toolbox.css">
+      <core-toolbar class="medium-tall">
+          <img src="../img/toolbox-32.png" width="24" style="margin-right:5px; vertical-align: top;">
+          <span class="bold">Hangout</span> <span class="light"> Toolbox</span>
+        <div class="bottom fit" horizontal layout>
+            <paper-tabs selected="{{page}}" valueattr='id' flex class="green" style="max-width: 400px;">
+              <paper-tab id="lowerthird">
+                <core-icon icon="account-box"></core-icon>
+              </paper-tab>
+              <paper-tab id="presets">
+                <core-icon icon="list"></core-icon>
+              </paper-tab>
+              <paper-tab id="volumecontrol">
+                <core-icon icon="av:volume-up"></core-icon>
+              </paper-tab>
+              <paper-tab id="about">
+                <core-icon icon="info-outline"></core-icon>
+              </paper-tab>
+              <paper-tab id="settings">
+                <core-icon icon="settings"></core-icon>
+              </paper-tab>
+            </paper-tabs>
+        </div>
+      </core-toolbar>
+
+      <core-animated-pages selected="{{page}}" valueattr="id" transitions="slide-from-right">
+        <section id="lowerthird">
+            <div class="header">
+              <h3>Lower Third</h3>
+              <paper-toggle-button class="headerswitch" on-click="{{toggleShow}}"></paper-toggle-button>
+              <paper-icon-button icon="device:screen-rotation" id="mirror" class="small" on-click="{{toggleMirror}}"></paper-icon-button>
+            </div>
+            <paper-input floatingLabel id="displayName" class="lowerthird" label="Display Name" value={{participant}}></paper-input>
+            <paper-input floatingLabel class="lowerthird" label="Tagline" id="tagline" value={{tagline}}></paper-input>
+            <file-input class="button raised" id="logoupload" accept="image/*" extensions='["jpeg", "jpg", "png"]' maxFiles="1">CHOOSE LOGO<paper-ripple fit></paper-ripple></file-input>
+              <paper-dropdown-menu label="Select color">
+                <paper-dropdown class="dropdown">
+                  <core-menu class="menu" id="colormenu">
+                      <paper-item class="Red" data-pcolor="#F44336" data-scolor="#D32F2F">Red</paper-item>
+                      <paper-item class="Pink" data-pcolor="#E91E63" data-scolor="#C2185B">Pink</paper-item>
+                      <paper-item class="Purple" data-pcolor="#9C27B0" data-scolor="#7B1FA2">Purple</paper-item>
+                      <paper-item class="DeepPurple" data-pcolor="#673AB7" data-scolor="#512DA8">Deep Purple</paper-item>
+                      <paper-item class="Indigo" data-pcolor="#3F51B5" data-scolor="#303F9F">Indigo</paper-item>
+                      <paper-item class="Blue" data-pcolor="#2196F3" data-scolor="#1976D2">Blue</paper-item>
+                      <paper-item class="LightBlue" data-pcolor="#03A9F4" data-scolor="#0288D1">Light Blue</paper-item>
+                      <paper-item class="Cyan" data-pcolor="#00BCD4" data-scolor="#0097A7">Cyan</paper-item>
+                      <paper-item class="Teal" data-pcolor="#009688" data-scolor="#00796B">Teal</paper-item>
+                      <paper-item class="Green" data-pcolor="#4CAF50" data-scolor="#388E3C">Green</paper-item>
+                      <paper-item class="LightGreen" data-pcolor="#8BC34A" data-scolor="#689F38">Light Green</paper-item>
+                      <paper-item class="Lime" data-pcolor="#CDDC39" data-scolor="#AFB42B">Lime</paper-item>
+                      <paper-item class="Yellow" data-pcolor="#FFEB3B" data-scolor="#FBC02D">Yellow</paper-item>
+                      <paper-item class="Amber" data-pcolor="#FFC107" data-scolor="#FFA000">Amber</paper-item>
+                      <paper-item class="Orange" data-pcolor="#FF9800" data-scolor="#F57C00">Orange</paper-item>
+                      <paper-item class="DeepOrange" data-pcolor="#FF5722" data-scolor="#E64A19">Deep Orange</paper-item>
+                      <paper-item class="Brown" data-pcolor="#795548" data-scolor="#5D4037">Brown</paper-item>
+                      <paper-item class="Grey" data-pcolor="#9E9E9E" data-scolor="#616161">Grey</paper-item>
+                      <paper-item class="BlueGrey" data-pcolor="#607D8B" data-scolor="#455A64">Blue Grey</paper-item>
+                  </core-menu>
+                </paper-dropdown>
+              </paper-dropdown-menu>
+            <hr>
+            <div class="header">
+              <h3>Custom Overlay</h3>
+              <paper-toggle-button class="headerswitch"></paper-toggle-button><br>
+            </div>
+            <paper-button class="red" label="UPLOAD" raisedButton style="margin-left: 25px; margin-bottom: 10px">UPLOAD</paper-button>
+
+        </section>
+        <section id="presets">
+          <div class="header">
+              <h3>Presets</h3>
+          </div>
+          <paper-input floatingLabel class="preset" label="Preset Name"></paper-input>
+          <paper-icon-button icon="add" class="big" style="margin-top: 12px;"></paper-icon-button>
+          <div style="height:487px; clear:both; overflow-x:hidden;">
+            <div class="preset-item-name">Preset 1</div>
+            <div class="preset-item-buttons">
+              <paper-radio-button style="height:26px;"></paper-radio-button><paper-icon-button icon="delete"></paper-icon-button>
+            </div>
+
+            <div class="preset-item-name">Preset 2</div>
+            <div class="preset-item-buttons">
+              <paper-radio-button style="height:26px;"></paper-radio-button><paper-icon-button icon="delete"></paper-icon-button>
+            </div>
+
+            <div class="preset-item-name">Preset 3</div>
+            <div class="preset-item-buttons">
+              <paper-radio-button style="height:26px;"></paper-radio-button><paper-icon-button icon="delete"></paper-icon-button>
+            </div>
+
+            <div class="preset-item-name">Preset 4</div>
+            <div class="preset-item-buttons">
+              <paper-radio-button style="height:26px;"></paper-radio-button><paper-icon-button icon="delete"></paper-icon-button>
+            </div>
+
+            <div class="preset-item-name">Preset 5</div>
+            <div class="preset-item-buttons">
+              <paper-radio-button style="height:26px;"></paper-radio-button><paper-icon-button icon="delete"></paper-icon-button>
+            </div>
+          </div>
+        </section>
+        <section id="volumecontrol" class="green-slider">
+          <div class="header">
+              <h3>Volume Control</h3>
+              <paper-toggle-button class="headerswitch"></paper-toggle-button><br>
+          </div>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+          <img class="profile-logo" src="../img/profile.png"><paper-slider pin value="50"></paper-slider>
+        </section>
+        <section id="about">
+          <div class="header">
+              <h3>About</h3>
+          </div>
+          <p style="margin-left: 25px; font-size: 14px">
+          Hangout Toolbox provides useful applications to improve your Hangout experience.<br><br>
+For an even better experience,<br> try <a href="https://www.google.com/chrome/" target="_blank">Google Chrome</a><br><br>
+Version: 2.0.1
+          </p>
+          <h3>Support</h3>
+        </section>
+        <section id="settings">
+          <div class="header">
+              <h3>Settings</h3>
+          </div>
+          <div style="margin-left: 25px; float: left; font-size: 14px;">Enable Auto Load</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
+          <div style="clear: both; margin-top: 15px;"></div>
+          <div style="margin-left: 25px; float: left; font-size: 14px">Mute sounds</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
+          <div style="clear: both; margin-top: 15px;"></div>
+          <div style="margin-left: 25px; float: left; font-size: 14px">Use last Lowerthird</div><paper-checkbox style="float:right; margin-right: 20px"></paper-checkbox>
+        </section>
+      </core-animated-pages>
+    </template>
+    <script>
+    (function (global) {
+      var thiss;
+      var globalShow = false;
+	    var globalShowCustom = false;
+	    var globalShowSaved = false;
+
+      var logoFile = null;
+
+      var overlays = {};
+      var canvas = null;
+      var canvas_screen = null;
+
+      if(typeof FileReader !== "undefined"){
+		    this.fileReader = new FileReader();
+	    }
+
+	    function getParticipant() {
+	      var uid = global.gapi.hangout.getLocalParticipantId();
+      	var p = global.gapi.hangout.getParticipants();
+      	for(i = 0; i < p.length; i++) {
+          if(p[i].id == uid){
+            var user = p[i].person.displayName;
+            return user;
+          }
+        }
+	    }
+
+      function getParticipantImageUrl() {
+        var uid = global.gapi.hangout.getLocalParticipantId();
+        var p = global.gapi.hangout.getParticipants();
+        for(i = 0; i < p.length; i++) {
+          if(p[i].id == uid){
+            var url = p[i].person.image.url;
+            return url;
+          }
+        }
+      }
+
+      function createElement(type, attr){
+	      return jQuery("<" + type + ">").attr(attr || {});
+      }
+
+      var mainCanvas = document.getElementById("main-canvas");
+      var backgroundCanvas = document.getElementById("background-canvas");
+      var imageCanvas = document.getElementById("image-canvas");
+
+      var mainctx = mainCanvas.getContext("2d");
+      var backgroundctx = backgroundCanvas.getContext("2d");
+      var imagectx = imageCanvas.getContext("2d");
+
+      function createBackground() {
+              console.log("creating background");
+              console.log(thiss.participant);
+              if(document.querySelector('hangout-toolbox::shadow #colormenu').selectedItem){
+                var selectedItem = document.querySelector('hangout-toolbox::shadow #colormenu').selectedItem;
+                var selectedItem = $(selectedItem);
+                var selectedItem = document.querySelector('hangout-toolbox::shadow #colormenu').selectedItem;
+                var selectedItem = $(selectedItem);
+                var pcolor = selectedItem.attr('data-pcolor') || '#3F51B5';
+                var scolor = selectedItem.attr('data-scolor') || '#303F9F';
+              } else {
+                var pcolor = '#3F51B5';
+                var scolor = '#303F9F';
+              }
+              if(pcolor === '#8BC34A' || pcolor === '#CDDC39' || pcolor === '#FFEB3B' || pcolor === '#FFC107'){
+                var fcolor = '#000';
+              } else {
+                var fcolor = '#fff';
+              }
+              backgroundctx.clearRect(0,0,1280,720);
+              backgroundctx.fillStyle = pcolor;
+              backgroundctx.fillRect(0,600,1024,60);
+              backgroundctx.fillStyle = scolor;
+              backgroundctx.fillRect(0,660,1024,30);
+              //Text
+              backgroundctx.font = "300 42px Arial";
+              backgroundctx.fillStyle = fcolor;
+              backgroundctx.fillText(thiss.participant,160,645);
+          
+              backgroundctx.font = "300 22px Arial";
+              backgroundctx.fillStyle = fcolor;
+              backgroundctx.fillText(thiss.tagline,160,682);
+          
+              backgroundUrl = backgroundCanvas.toDataURL();
+              //console.log(backgroundUrl);
+              mainctx.clearRect(0,0,1280,720);
+              mainctx.drawImage(backgroundCanvas, 0, 0);
+      }
+
+      // TODO
+      /*
+        - Logo upload
+        - color dropdown
+        - custom upload
+        - presets
+        - volume control
+        - settings
+      */
+
+      function createProfileCircle(src) {
+          console.log("creating profile pic");
+
+          var img = new Image();
+              img .setAttribute('crossOrigin', 'anonymous');
+              img.onload = function(){ 
+                imagectx.clearRect(0,0,1280,720); 
+                imagectx.save();  
+                imagectx.beginPath();
+                imagectx.arc(78, 598, 48, 0, Math.PI*2,true);
+                imagectx.clip();
+                imagectx.drawImage(img,30,550,96,96);
+                  mainctx.drawImage(imageCanvas, 0, 0);
+                  //THIS IS IT
+                  console.log(mainCanvas.toDataURL());
+                  var canvasImage = gapi.hangout.av.effects.createImageResource(mainCanvas.toDataURL());
+                  overlays['lowerthird'] = canvasImage.createOverlay({
+                  });
+                  overlays['lowerthird'].setScale(1, gapi.hangout.av.effects.ScaleReference.WIDTH);
+                  overlays['lowerthird'].setPosition(0, 0);
+                  if(globalShow === true){
+                    overlays['lowerthird'].setVisible(true);
+                  }else{
+                    overlays['lowerthird'].setVisible(false);
+                    overlays['lowerthird'].dispose();
+                    delete overlays['lowerthird'];
+                  }
+                  //console.log(canvasImage);
+              };
+               img.src = src;
+      }
+
+      function toggleLowerThird(){
+        console.log(globalShow);
+        console.log(logoFile);
+        if(globalShow === false){
+          globalShow = true;
+          createBackground();
+          createProfileCircle(logoFile || thiss.participantImageUrl);
+          console.log(globalShow);
+          return;
+        }
+        globalShow = false;
+        overlays['lowerthird'].setVisible(false);
+			  overlays['lowerthird'].dispose();
+			  delete overlays['lowerthird'];
+      }
+
+      getInputValue = function(id){
+      	return jQuery("#" + id).val();
+      }
+
+      Polymer("hangout-toolbox", {
+        ready: function(){
+          // scrape the state off the window location
+          this.page = location.hash.slice(1)|| 'lowerthird';
+          this.logoFile = "";
+          // listen for 'back' events
+          addEventListener('popstate', this.popstate.bind(this));
+          document.querySelector('hangout-toolbox::shadow #logoupload').addEventListener('change', function(event) {
+            console.log(event.detail.valid);
+            var files = event.detail.valid;
+            var picReader = new FileReader();
+            picReader.addEventListener("load",function(event){
+              var picFile = event.target;
+              console.log(picFile.result);
+              logoFile = picFile.result;
+            });
+            picReader.readAsDataURL(files[0]);
+          });
+        },
+        readyCallback: function() {
+          this.participant = getParticipant();
+          this.participantImageUrl = getParticipantImageUrl();
+        },
+        toggleMirror: function(){
+          console.log("Mirrored");
+          gapi.hangout.av.setLocalParticipantVideoMirrored(!gapi.hangout.av.isLocalParticipantVideoMirrored());
+        },
+        toggleShow: function(){
+          toggleLowerThird();
+          console.log("LowerThird On/Off");
+        },
+        pageChanged: function() {
+          // if the selected page changes, push a state (unless we are going backward)
+          if (this.poppedPage !== this.page) {
+            history.pushState(this.page, "Title", '#' + this.page);
+          }
+        },
+        popstate: function(event) {
+          // comes here whether we went 'back' from code or UI
+          this.poppedPage = this.page = event.state;
+        },
+        back: function(){
+          // support custom UI for back
+          history.back();
+        },
+        domReady: function() {
+          console.log("DOM ready");
+          thiss = this;
+          this.hangout = (global.gapi && global.gapi.hangout);
+          var menu = document.querySelector('paper-dropdown');
+          console.log(menu);
+        }
+      });
+    }(this));
+    </script>
+  </polymer-element>

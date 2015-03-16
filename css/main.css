@@ -1,9 +1,14 @@
 body {
-    font-family: 'RobotoDraft';
-    margin: 0;
-    padding: 0px;
     overflow:hidden;
     font-size: 14px;
     max-width: 300px;
     background-color: #fff;
 }
+
+:host {
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+  canvas { position: absolute; }
+#main-canvas { z-index: 9}
+  #background-canvas { z-index: 1 ; display:none;}
+  #image-canvas { z-index: 3; display:none;}

@@ -5,8 +5,8 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /components
-  static_dir: components
+- url: /bower_components
+  static_dir: bower_components
 
 - url: /css
   static_dir: css
@@ -14,8 +14,8 @@ handlers:
 - url: /img
   static_dir: img
 
-- url: /custom
-  static_dir: custom
+- url: /custom_components
+  static_dir: custom_components
 
 - url: /index.html
   static_files: index.html
