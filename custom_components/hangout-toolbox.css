@@ -40,6 +40,29 @@ file-input.button {
       background-color: #e84e40;
       color: #fff;
     }
+    file-input.button2 {
+      display: inline-block;
+      position: relative;
+      margin-left: 20px;
+      padding-left: 6px;
+      width: 123px;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 2px;
+      font-size: 0.9em;
+      background-color: #e84e40;
+      color: #fff;
+    }
+    file-input.button2.raised {
+      transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition-delay: 0.2s;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    }
+    
+    file-input.button2.raised:active {
+      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+      transition-delay: 0s;
+    }
 file-input.button > paper-ripple {
       border-radius: 2px;
       overflow: hidden;
